@@ -173,6 +173,7 @@
 #include "chrome/browser/ui/webui/settings/settings_default_browser_handler.h"
 #include "chrome/browser/ui/webui/settings/settings_manage_profile_handler.h"
 #include "chrome/browser/ui/webui/settings/system_handler.h"
+#include "chrome/browser/ui/webui/settings/window_controls_handler.h"
 #include "components/language/core/common/language_experiments.h"
 #endif  // BUILDFLAG(IS_CHROMEOS)
 
@@ -229,6 +230,10 @@ SettingsUI::SettingsUI(content::WebUI* web_ui)
       std::make_unique<ClearBrowsingDataHandler>(web_ui, profile));
   AddSettingsPageUIHandler(std::make_unique<SafetyHubHandler>(profile));
   AddSettingsPageUIHandler(std::make_unique<DownloadsHandler>(profile));
+  // Custom: window controls visibility handler (Linux/Windows desktop)
+#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_WIN)
+  AddSettingsPageUIHandler(std::make_unique<WindowControlsHandler>(profile));
+#endif
   AddSettingsPageUIHandler(std::make_unique<ExtensionControlHandler>());
   AddSettingsPageUIHandler(std::make_unique<FontHandler>(profile));
   AddSettingsPageUIHandler(std::make_unique<ImportDataHandler>());

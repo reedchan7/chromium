@@ -100,6 +100,7 @@
 #include "chrome/browser/webauthn/webauthn_pref_names.h"
 #include "chrome/common/buildflags.h"
 #include "chrome/common/pref_names.h"
+#include "chrome/common/pref_names_window_controls.h"
 #include "chrome/common/secure_origin_allowlist.h"
 #include "components/autofill/core/common/autofill_prefs.h"
 #include "components/blocked_content/safe_browsing_triggered_popup_blocker.h"
@@ -2083,6 +2084,11 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry,
   RegisterGeminiSettingsPrefs(registry);
   RegisterPrefersDefaultScrollbarStylesPrefs(registry);
   RegisterSafetyHubProfilePrefs(registry);
+  
+  // Window control buttons visibility preferences
+  registry->RegisterBooleanPref(prefs::kShowMinimizeButton, false);
+  registry->RegisterBooleanPref(prefs::kShowMaximizeButton, false);
+  registry->RegisterBooleanPref(prefs::kShowCloseButton, false);
 #if BUILDFLAG(IS_CHROMEOS)
   settings::ResetSettingsHandler::RegisterProfilePrefs(registry);
 #endif  // BUILDFLAG(IS_CHROMEOS)

@@ -137,6 +137,7 @@
 #include "chrome/browser/ui/views/frame/multi_contents_view_drop_target_controller.h"
 #include "chrome/browser/ui/views/frame/multi_contents_view_mini_toolbar.h"
 #include "chrome/browser/ui/views/frame/scrim_view.h"
+#include "chrome/browser/ui/views/frame/window_controls_manager.h"
 #include "chrome/browser/ui/views/frame/tab_modal_dialog_host.h"
 #include "chrome/browser/ui/views/frame/tab_strip_region_view.h"
 #include "chrome/browser/ui/views/frame/top_container_loading_bar.h"
@@ -5119,6 +5120,10 @@ void BrowserView::AddedToWidget() {
 
   UpdateWindowControlsOverlayEnabled();
   UpdateBorderlessModeEnabled();
+
+  // Initialize window controls manager
+  window_controls_manager_ = std::make_unique<WindowControlsManager>(this);
+  window_controls_manager_->Initialize();
 
   // TODO(crbug.com/40664862): Remove BrowserViewLayout dependence on
   // Widget and move to the constructor.

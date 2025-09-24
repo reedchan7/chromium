@@ -93,6 +93,7 @@ class TopControlsSlideControllerTest;
 class VerticalTabStripRegionView;
 class WebAppFrameToolbarView;
 class WebUITabStripContainerView;
+class WindowControlsManager;  // Forward declaration for window controls feature
 
 namespace gfx {
 class AnimationRunner;
@@ -1380,6 +1381,9 @@ class BrowserView : public BrowserWindow,
   ui::OmniboxPopupCloser omnibox_popup_closer_{this};
 
   base::CallbackListSubscription vertical_tab_subscription_;
+
+  // Manages window control buttons visibility
+  std::unique_ptr<WindowControlsManager> window_controls_manager_;
 
   mutable base::WeakPtrFactory<BrowserView> weak_ptr_factory_{this};
 };

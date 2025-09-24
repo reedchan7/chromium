@@ -34,10 +34,16 @@ source_set("toolbar_button_provider") {
 }
 
 source_set("frame") {
-  sources = [ "tab_strip_view_interface.h" ]
+  sources = [ 
+    "tab_strip_view_interface.h",
+    "window_controls_manager.cc",
+    "window_controls_manager.h",
+  ]
 
   deps = [
     "//chrome/browser/ui/views",
+    "//chrome/common",
+    "//components/prefs",
     "//components/tab_groups",
     "//ui/views",
   ]
